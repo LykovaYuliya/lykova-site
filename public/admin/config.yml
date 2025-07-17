@@ -1,6 +1,8 @@
 backend:
-  name: git-gateway
+  name: github
+  repo: LykovaYuliya/lykova-site
   branch: main
+  auth_scope: repo
 
 media_folder: "public/uploads"
 public_folder: "/uploads"
@@ -15,4 +17,3 @@ collections:
       - { label: "Заголовок", name: "title", widget: "string" }
       - { label: "Дата", name: "date", widget: "datetime" }
       - { label: "Текст", name: "body", widget: "markdown" }
-
