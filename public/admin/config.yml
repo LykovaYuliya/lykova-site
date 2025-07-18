@@ -2,7 +2,10 @@ backend:
   name: github
   repo: LykovaYuliya/lykova-site
   branch: main
-  auth_scope: repo
+  auth_type: oauth
+  app_id: Ov23lisdzdmHbcCzxbhI
+  base_url: https://lykova-site.vercel.app
+  auth_endpoint: /api/auth
 
 media_folder: "public/uploads"
 public_folder: "/uploads"
@@ -10,7 +13,7 @@ public_folder: "/uploads"
 collections:
   - name: "blog"
     label: "Блог"
-    folder: "public/blog"
+    folder: "content/blog"
     create: true
     slug: "{{slug}}"
     fields:
