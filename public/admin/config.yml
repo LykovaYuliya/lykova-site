@@ -3,7 +3,7 @@ backend:
   repo: LykovaYuliya/lykova-site
   branch: main
   auth_type: implicit
-
+  base_url: https://lykova-site.vercel.app
 
 media_folder: "public/uploads"
 public_folder: "/uploads"
