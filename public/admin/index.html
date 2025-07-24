@@ -3,12 +3,12 @@
   <head>
     <meta charset="utf-8" />
     <title>Decap CMS</title>
-    <script src="https://unpkg.com/decap-cms@latest/dist/decap-cms.js"></script>
+    <script>
+       window.CMS_CONFIG_PATH = "https://lykova-site.vercel.app/admin/config.yml";
+</script>
+    </script>
   </head>
   <body>
-    <script>
-      window.CMS_MANUAL_INIT = true;
-      CMS.init();
-    </script>
+    <script src="https://unpkg.com/decap-cms@3.0.0/dist/decap-cms.js"></script>
   </body>
 </html>
