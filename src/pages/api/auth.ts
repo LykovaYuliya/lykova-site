@@ -1,11 +1,25 @@
-import type { APIRoute } from "astro";
+import type { APIRoute } from 'astro';
+import { AuthorizationCode } from 'simple-oauth2';
 
-export const GET: APIRoute = async ({ redirect }) => {
-  const clientId = import.meta.env.GITHUB_CLIENT_ID;
-  const redirectUri = "https://lykova-site.vercel.app/api/callback";
-  const scope = "repo,user";
+const client = new AuthorizationCode({
+  client: {
+    id: import.meta.env.GITHUB_CLIENT_ID,
+    secret: import.meta.env.GITHUB_CLIENT_SECRET,
+  },
+  auth: {
+    tokenHost: 'https://github.com',
+    tokenPath: '/login/oauth/access_token',
+    authorizePath: '/login/oauth/authorize',
+  },
+});
 
-  return redirect(
-    `https://github.com/login/oauth/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scope}`
-  );
+export const get: APIRoute = async ({ request }) => {
+  const authorizationUri = client.authorizeURL({
+    redirect_uri: `${import.meta.env.OAUTH_REDIRECT_URI}`,
+    scope: 'repo',
+  });
+  return new Response(null, {
+    status: 302,
+    headers: { Location: authorizationUri },
+  });
 };

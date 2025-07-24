@@ -1,33 +1,34 @@
-import type { APIRoute } from "astro";
+import type { APIRoute } from 'astro';
+import { AuthorizationCode } from 'simple-oauth2';
 
-export const GET: APIRoute = async ({ request }) => {
+const client = new AuthorizationCode({
+  client: {
+    id: import.meta.env.GITHUB_CLIENT_ID,
+    secret: import.meta.env.GITHUB_CLIENT_SECRET,
+  },
+  auth: {
+    tokenHost: 'https://github.com',
+    tokenPath: '/login/oauth/access_token',
+    authorizePath: '/login/oauth/authorize',
+  },
+});
+
+export const get: APIRoute = async ({ request }) => {
   const url = new URL(request.url);
-  const code = url.searchParams.get("code");
+  const code = url.searchParams.get('code');
 
-  if (!code) {
-    return new Response("Missing code", { status: 400 });
-  }
+  if (!code) return new Response('Missing code', { status: 400 });
 
-  const client_id = import.meta.env.GITHUB_CLIENT_ID;
-  const client_secret = import.meta.env.GITHUB_CLIENT_SECRET;
-
-  const tokenRes = await fetch("https://github.com/login/oauth/access_token", {
-    method: "POST",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      client_id,
-      client_secret,
+  try {
+    const accessToken = await client.getToken({
       code,
-    }),
-  });
-
-  const tokenJson = await tokenRes.json();
-
-  return new Response(JSON.stringify(tokenJson), {
-    status: 200,
-    headers: { "Content-Type": "application/json" },
-  });
+      redirect_uri: `${import.meta.env.OAUTH_REDIRECT_URI}`,
+    });
+    return new Response(JSON.stringify(accessToken.token), {
+      headers: { 'Content-Type': 'application/json' },
+    });
+  } catch (error) {
+    console.error(error);
+    return new Response('OAuth error', { status: 500 });
+  }
 };
