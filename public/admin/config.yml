@@ -5,16 +5,18 @@ backend:
   auth_type: oauth
   app_id: Ov23lisdzdmHbcCzxbhI
   base_url: https://lykova-site.vercel.app
+  auth_endpoint: /api/auth
 
-media_folder: "public/images/uploads"
-public_folder: "/images/uploads"
+media_folder: "public/uploads"
+public_folder: "/uploads"
 
 collections:
-  - name: "articles"
-    label: "Articles"
-    folder: "src/content/articles"
+  - name: "blog"
+    label: "Блог"
+    folder: "content/blog"
     create: true
     slug: "{{slug}}"
     fields:
-      - { label: "Title", name: "title", widget: "string" }
-      - { label: "Body", name: "body", widget: "markdown" }
+      - { label: "Заголовок", name: "title", widget: "string" }
+      - { label: "Дата", name: "date", widget: "datetime" }
+      - { label: "Текст", name: "body", widget: "markdown" }
