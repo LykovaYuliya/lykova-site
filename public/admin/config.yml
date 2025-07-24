@@ -2,10 +2,9 @@ backend:
   name: github
   repo: LykovaYuliya/lykova-site
   branch: main
-  auth_type: oauth
+  auth_type: implicit
   app_id: Ov23lisdzdmHbcCzxbhI
   base_url: https://lykova-site.vercel.app
-  auth_endpoint: /api/auth
 
 media_folder: "public/uploads"
 public_folder: "/uploads"
