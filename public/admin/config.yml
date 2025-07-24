@@ -2,19 +2,19 @@ backend:
   name: github
   repo: LykovaYuliya/lykova-site
   branch: main
-  auth_type: implicit
+  auth_type: oauth
+  app_id: Ov23lisdzdmHbcCzxbhI
+  base_url: https://lykova-site.vercel.app
 
-media_folder: "public/uploads"
-public_folder: "/uploads"
+media_folder: "public/images/uploads"
+public_folder: "/images/uploads"
 
 collections:
-  - name: "blog"
-    label: "Блог"
-    folder: "content/blog"
+  - name: "articles"
+    label: "Articles"
+    folder: "src/content/articles"
     create: true
     slug: "{{slug}}"
     fields:
-      - { label: "Заголовок", name: "title", widget: "string" }
-      - { label: "Дата", name: "date", widget: "datetime" }
-      - { label: "Текст", name: "body", widget: "markdown" }
-
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Body", name: "body", widget: "markdown" }
