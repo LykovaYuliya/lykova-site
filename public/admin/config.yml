@@ -1,19 +1,17 @@
 backend:
-  name: github
-  repo: LykovaYuliya/lykova-site
+  name: git-gateway
   branch: main
-  auth_type: implicit
 
 media_folder: "public/uploads"
 public_folder: "/uploads"
 
 collections:
   - name: "blog"
-    label: "Блог"
+    label: "Р‘Р»РѕРі"
     folder: "content/blog"
     create: true
     slug: "{{slug}}"
     fields:
-      - { label: "Заголовок", name: "title", widget: "string" }
-      - { label: "Дата", name: "date", widget: "datetime" }
-      - { label: "Текст", name: "body", widget: "markdown" }
+      - { label: "Р—Р°РіРѕР»РѕРІРѕРє", name: "title", widget: "string" }
+      - { label: "Р”Р°С‚Р°", name: "date", widget: "datetime" }
+      - { label: "РўРµРєСЃС‚", name: "body", widget: "markdown" }
